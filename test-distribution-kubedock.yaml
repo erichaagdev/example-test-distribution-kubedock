@@ -71,7 +71,7 @@ spec:
         app.kubernetes.io/part-of: gradle-enterprise
         app.kubernetes.io/component: test-distribution-agent
     spec:
-      serviceAccountName: kubedock
+      serviceAccountName: test-distribution-agent
       securityContext:
         runAsUser: 999
         runAsGroup: 0
