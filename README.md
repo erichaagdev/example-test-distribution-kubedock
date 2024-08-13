@@ -65,7 +65,7 @@ kubectl delete -f test-distribution-kubedock.yaml
 
 4. Watch the pods
 
-In a new terminal, watch the pods.
+**In a _new_ terminal**, watch the pods.
 When the example runs the tests in the next step, you will see the required pods being created and destroyed by kubedock.
 
 ```shell
@@ -74,26 +74,16 @@ kubectl get pods -w
 
 Leave this terminal open.
 
-5. Run the tests
+5. Run the tests using only remote executors
 
 The tests for the build located in the `example-testcontainers` directory rely on Testcontainers to start a PostgreSQL container.
-They are configured to only use remote executors.
-
-Before running the tests, you need to update the configured Develocity server in `example-testcontainers/settings.gradle.kts`.
-
-```kotlin
-develocity {
-    server = "«server-url»"
-}
-```
-
-Invoke the build to run the tests.
+Invoke the build with the tests using only remote executors.
 
 ```shell
-(cd example-testcontainers && ./gradlew build)
+(cd example-testcontainers && ./gradlew build -PmaxRemoteExecutors=2 -PmaxLocalExecutors=0)
 ```
 
-Switch to the terminal where you are watching the pods.
+Switch to the terminal watching the pods.
 You will see the required pods being created and destroyed by kubedock.
 
 ```text
@@ -124,21 +114,11 @@ Example: https://ge.solutions-team.gradle.com/s/riwlhhqtxvbyu/tests/overview
 
 6. Run the tests again using only local executors
 
-Configure the test suite in `example-testcontainers` to use only local executors.
-
-```text
-develocity {
-    testDistribution {
-        enabled = true
-        // maxLocalExecutors = 0
-        // maxRemoteExecutors = 2
-        maxLocalExecutors = 2
-        maxRemoteExecutors = 0
-    }
-}
+```shell
+(cd example-testcontainers && ./gradlew build -PmaxRemoteExecutors=0 -PmaxLocalExecutors=2)
 ```
 
-Assuming a Docker environment is running and available, the tests will now use it instead. 
+Assuming a Docker environment is running and available, the tests will now use this instead. 
 
 Inspect the build scan to verify the tests completed successfully and were executed on local executors.
 

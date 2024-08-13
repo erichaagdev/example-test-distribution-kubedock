@@ -5,5 +5,5 @@ plugins {
 rootProject.name = "example-testcontainers"
 
 develocity {
-    server = "https://ge.solutions-team.gradle.com"
+    server = providers.environmentVariable("DEVELOCITY_SERVER_URL")
 }

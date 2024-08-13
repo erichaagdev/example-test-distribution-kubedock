@@ -24,8 +24,8 @@ val test by testing.suites.getting(JvmTestSuite::class) {
             develocity {
                 testDistribution {
                     enabled = true
-                    maxLocalExecutors = 0
-                    maxRemoteExecutors = 2
+                    maxLocalExecutors = providers.gradleProperty("maxLocalExecutors").map { it.toInt() }.orElse(0)
+                    maxRemoteExecutors = providers.gradleProperty("maxRemoteExecutors").map { it.toInt() }.orElse(0)
                 }
             }
         }
