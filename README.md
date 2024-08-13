@@ -25,9 +25,9 @@ export DEVELOCITY_SERVER_URL=«server-url»
 2. Deploy the Test Distribution agents with kubedock sidecars to the Kubernetes cluster
 
 ```shell
-sed "s/«registration-key»/$TEST_DISTRIBUTION_AGENT_REGISTRATION_KEY/g" test-distribution-kubedock.yaml \
-  | sed "s/«pool-id»/$TEST_DISTRIBUTION_AGENT_POOL_ID/g" \
-  | sed "s/«server-url»/$DEVELOCITY_SERVER_URL/g" \
+sed "s|«registration-key»|$TEST_DISTRIBUTION_AGENT_REGISTRATION_KEY|g" test-distribution-kubedock.yaml \
+  | sed "s|«pool-id»|$TEST_DISTRIBUTION_AGENT_POOL_ID|g" \
+  | sed "s|«server-url»|$DEVELOCITY_SERVER_URL|g" \
   | kubectl apply -f -
 ```
 
