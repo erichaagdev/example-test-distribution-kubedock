@@ -79,7 +79,7 @@ spec:
       terminationGracePeriodSeconds: 600
       containers:
         - name: kubedock
-          image: joyrex2001/kubedock:0.16.0
+          image: joyrex2001/kubedock:0.17.0
           args:
             - server
             - --reverse-proxy
@@ -88,6 +88,8 @@ spec:
           volumeMounts:
             - name: kubedock-socket
               mountPath: /var/run
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
         - name: test-distribution-agent
           image: gradle/develocity-test-distribution-agent
           resources:
@@ -116,4 +118,6 @@ spec:
               mountPath: /var/run
       volumes:
         - name: kubedock-socket
+          emptyDir: { }
+        - name: postgres-storage
           emptyDir: { }
