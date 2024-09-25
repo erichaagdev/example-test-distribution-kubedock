@@ -88,6 +88,8 @@ spec:
           volumeMounts:
             - name: kubedock-socket
               mountPath: /var/run
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
         - name: test-distribution-agent
           image: gradle/develocity-test-distribution-agent
           resources:
@@ -116,4 +118,6 @@ spec:
               mountPath: /var/run
       volumes:
         - name: kubedock-socket
+          emptyDir: { }
+        - name: postgres-storage
           emptyDir: { }
