@@ -79,7 +79,7 @@ spec:
       terminationGracePeriodSeconds: 600
       containers:
         - name: kubedock
-          image: joyrex2001/kubedock:0.16.0
+          image: joyrex2001/kubedock:0.17.0
           args:
             - server
             - --reverse-proxy
